@@ -16,11 +16,21 @@ export default function Detail({ shoes }) {
 	// console.log(id, getItem);
 
 	let [count, setCount] = useState(false);
+	let [string, setString] = useState(0);
 	useEffect(() => {
-		setTimeout(() => {
+		let timer = setTimeout(() => {
 			setCount(!count);
 		}, 2000);
+		return () => {
+			clearTimeout(timer);
+		};
 	}, []);
+
+	useEffect(() => {
+		if (isNaN(string)) {
+			alert("고마해라 많이무따이가");
+		}
+	}, [string]);
 
 	return (
 		<>
@@ -44,6 +54,12 @@ export default function Detail({ shoes }) {
 						<button className="btn btn-danger">주문하기</button>
 					</div>
 					<Divs color="blue">123123</Divs>
+					<input
+						type=""
+						onChange={(e) => {
+							setString(e.target.value);
+						}}
+					/>
 				</div>
 			</div>
 		</>

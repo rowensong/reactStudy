@@ -10,6 +10,7 @@ import About from "./routes/About.js";
 import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Event from "./routes/Event";
+import axios from "axios";
 
 function App() {
 	let [shoes, setShoes] = useState(data);
@@ -55,6 +56,18 @@ function App() {
 									})}
 								</div>
 							</div>
+							<button
+								onClick={() => {
+									axios
+										.get("https://codingapple1.github.io/shop/data2.json")
+										.then(({ data }) => {
+											let getShoes = [...shoes, ...data];
+											setShoes(getShoes);
+										});
+								}}
+							>
+								request
+							</button>
 						</>
 					}
 				></Route>

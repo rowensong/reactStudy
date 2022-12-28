@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Nav from "react-bootstrap/Nav";
+import { Context1 } from "./../App.js";
 
 let Divs = styled.button`
 	background: ${(props) => props.color};
@@ -17,14 +19,7 @@ export default function Detail({ shoes }) {
 
 	let [count, setCount] = useState(false);
 	let [string, setString] = useState(0);
-	useEffect(() => {
-		let timer = setTimeout(() => {
-			setCount(!count);
-		}, 2000);
-		return () => {
-			clearTimeout(timer);
-		};
-	}, []);
+	let [tab, setTab] = useState(0);
 
 	useEffect(() => {
 		if (isNaN(string)) {
@@ -62,6 +57,49 @@ export default function Detail({ shoes }) {
 					/>
 				</div>
 			</div>
+			<Nav justify variant="tabs" defaultActiveKey="link-0">
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-0"
+						onClick={() => {
+							setTab(0);
+						}}
+					>
+						tab1
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-1"
+						onClick={() => {
+							setTab(1);
+						}}
+					>
+						tab2
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-2"
+						onClick={() => {
+							setTab(2);
+						}}
+					>
+						tab3
+					</Nav.Link>
+				</Nav.Item>
+			</Nav>
+			<TabContent tab={tab}></TabContent>
 		</>
 	);
+}
+
+function TabContent({ tab }) {
+	if (tab === 0) {
+		return <div>내용1</div>;
+	} else if (tab === 1) {
+		return <div>내용2</div>;
+	} else {
+		return <div>내용3</div>;
+	}
 }

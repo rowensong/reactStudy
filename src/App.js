@@ -7,14 +7,17 @@ import data from "./data.js";
 import Card from "./routes/Card.js";
 import Detail from "./routes/Detail.js";
 import About from "./routes/About.js";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Event from "./routes/Event";
+import Cart from "./routes/Cart";
 import axios from "axios";
+export let Context1 = createContext();
 
 function App() {
 	let [shoes, setShoes] = useState(data);
 	let navigate = useNavigate();
+	let [war, setWar] = useState([1, 2, 3]);
 
 	return (
 		<div className="App">
@@ -71,7 +74,14 @@ function App() {
 						</>
 					}
 				></Route>
-				<Route path="/detail/:id" element={<Detail shoes={shoes} />}></Route>
+				<Route
+					path="/detail/:id"
+					element={
+						<Context1.Provider value={{ shoes, war }}>
+							<Detail shoes={shoes} />
+						</Context1.Provider>
+					}
+				></Route>
 				<Route path="/about" element={<About />}>
 					<Route path="member" element={<div>member</div>}></Route>
 					<Route path="location" element={<div>location</div>}></Route>
@@ -81,6 +91,8 @@ function App() {
 					<Route path="two" element={<p>생일기념 쿠폰받기</p>}></Route>
 				</Route>
 				<Route path="*" element={<div>404 error</div>}></Route>
+
+				<Route path="/cart" element={<Cart />}></Route>
 			</Routes>
 		</div>
 	);

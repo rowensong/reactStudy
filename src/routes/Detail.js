@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
+import { useSelector, useDispatch } from "react-redux";
 import { Context1 } from "./../App.js";
-
+import { setItem } from "../Store.js";
 let Divs = styled.button`
 	background: ${(props) => props.color};
 	color: black;
@@ -20,6 +21,7 @@ export default function Detail({ shoes }) {
 	let [count, setCount] = useState(false);
 	let [string, setString] = useState(0);
 	let [tab, setTab] = useState(0);
+	let dispatch = useDispatch();
 
 	useEffect(() => {
 		if (isNaN(string)) {
@@ -46,7 +48,20 @@ export default function Detail({ shoes }) {
 						<h4 className="pt-5">{getItem.title}</h4>
 						<h4>{getItem.content}</h4>
 						<p>{getItem.price}</p>
-						<button className="btn btn-danger">주문하기</button>
+						<button
+							className="btn btn-danger"
+							onClick={() => {
+								dispatch(
+									setItem({
+										id: getItem.id,
+										name: getItem.title,
+										count: 1,
+									})
+								);
+							}}
+						>
+							주문하기
+						</button>
 					</div>
 					<Divs color="blue">123123</Divs>
 					<input

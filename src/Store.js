@@ -32,13 +32,17 @@ let cart = createSlice({
 			let index = state.findIndex((e) => {
 				return e.id === action.payload;
 			});
+			// let index = state.find((e) => {
+			// 	return e.id === action.payload;
+			// });
+			// console.log(index.name);
 			state[index].count++;
 		},
 
 		setItem(state, action) {
-			console.log("actions", action.payload);
+			// console.log("actions", action.payload);
 			state.push(action.payload);
-			console.log("actions", state[0], state[1], state[2]);
+			// console.log("actions", state[0], state[1], state[2]);
 		},
 	},
 });

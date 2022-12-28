@@ -11,7 +11,7 @@ export default function Cart() {
 		return state.cart;
 	});
 	let dispatch = useDispatch();
-	console.log(user.name);
+	// console.log(user.name);
 	return (
 		<div>
 			{user.name} 의 장바구니 {user.age}
